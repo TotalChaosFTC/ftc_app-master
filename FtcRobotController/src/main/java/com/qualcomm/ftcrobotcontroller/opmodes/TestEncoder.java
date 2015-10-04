@@ -72,8 +72,8 @@ public class TestEncoder extends OpMode {
     @Override
     public void loop()
     {
-        if( motorLeft.getChannelMode() == DcMotorController.RunMode.RESET_ENCODERS &&
-                motorRight.getChannelMode() == DcMotorController.RunMode.RESET_ENCODERS ) {
+        if( motorLeft.getCurrentPosition() == 0 &&
+                motorRight.getCurrentPosition() == 0 ) {
             motorLeft.setTargetPosition((int)COUNTS);
             motorRight.setTargetPosition((int)COUNTS);
             motorLeft.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);

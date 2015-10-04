@@ -33,52 +33,55 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * TeleOp Mode
  * <p>
  *Enables control of the robot via the gamepad
  */
-public class TesOp2 extends OpMode {
+public class ThreeMotorOp extends OpMode {
     DcMotor motorRight;
     DcMotor motorLeft;
     DcMotor motorRight2;
     DcMotor motorLeft2;
+    DcMotor motorRight3;
+    DcMotor motorLeft3;
     public void init()
     {
-        motorRight = hardwareMap.dcMotor.get("motor_2"); //Bottom left
-        motorLeft = hardwareMap.dcMotor.get("motor_1"); //Bottom right
-        motorRight2 = hardwareMap.dcMotor.get("motor_3"); // Top left
-        motorLeft2 = hardwareMap.dcMotor.get("motor_4"); //Top right
-        motorLeft2.setDirection(DcMotor.Direction.REVERSE);
-        motorRight2.setDirection(DcMotor.Direction.REVERSE);
+        motorRight = hardwareMap.dcMotor.get("motor_2");
+        motorLeft = hardwareMap.dcMotor.get("motor_1");
+        motorRight2 = hardwareMap.dcMotor.get("motor_3");
+        motorLeft2 = hardwareMap.dcMotor.get("motor_4");
+        motorRight3 = hardwareMap.dcMotor.get("motor_5");
+        motorLeft3 = hardwareMap.dcMotor.get("motor_6");
+        motorRight3.setDirection(DcMotor.Direction.REVERSE);
+        motorLeft3.setDirection(DcMotor.Direction.REVERSE);
     }
 
     @Override
-    public void loop() {
-        float throttle = -gamepad1.left_stick_y;
-        float dirrection = gamepad1.left_stick_x;
-        float right = throttle - dirrection;
-        float left = throttle + dirrection;
+    public void loop()
+    {
+         float throttle= -gamepad1.left_stick_y;
+         float dirrection= gamepad1.left_stick_x;
+         float right= throttle-dirrection;
+         float left= throttle+dirrection;
 
-        right = (float) scaleInput(right);
-        left = (float) scaleInput(left);
+         right = (float)scaleInput(right);
+         left =  (float)scaleInput(left);
 
-        right = Range.clip(right, -1, 1);
-        left = Range.clip(left, -1, 1);
+         right= Range.clip(right, -1, 1);
+         left= Range.clip(left, -1, 1);
 
         motorRight.setPower(right);
         motorLeft.setPower(left);
         motorRight2.setPower(right);
         motorLeft2.setPower(left);
+        motorRight3.setPower(right);
+        motorLeft3.setPower(left);
 
         telemetry.addData("Text", "*** Robot Data***");
-        telemetry.addData("left tgt pwr", "left  pwr: " + String.format("%.2f", left));
+        telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
     }
 
@@ -95,7 +98,8 @@ public class TesOp2 extends OpMode {
         int index = (int) (dVal * 16.0);
         if (index < 0) {
             index = -index;
-        } else if (index > 16) {
+        }
+        if (index > 16) {
             index = 16;
         }
 

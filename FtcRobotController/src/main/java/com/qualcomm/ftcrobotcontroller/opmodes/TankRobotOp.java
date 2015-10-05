@@ -40,7 +40,7 @@ import com.qualcomm.robotcore.util.Range;
  * <p>
  *Enables control of the robot via the gamepad
  */
-public class ThreeMotorOp extends OpMode {
+public class TankRobotOp extends OpMode {
     DcMotor motorRight;
     DcMotor motorLeft;
     DcMotor motorRight2;
@@ -63,10 +63,8 @@ public class ThreeMotorOp extends OpMode {
     @Override
     public void loop()
     {
-         float throttle= gamepad1.left_stick_y;
-         float dirrection= gamepad1.left_stick_x;
-         float right= throttle-dirrection;
-         float left= throttle+dirrection;
+         float left = gamepad1.left_stick_y;
+         float right= gamepad1.right_stick_y;
 
          right = (float)scaleInput(right);
          left =  (float)scaleInput(left);

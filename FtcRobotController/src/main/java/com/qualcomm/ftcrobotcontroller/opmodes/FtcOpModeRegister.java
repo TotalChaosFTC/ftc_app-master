@@ -106,8 +106,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("TestEncoder", TestEncoder.class);
     manager.register("ThreeMotorOp", ThreeMotorOp.class);
     manager.register("LeftSideOp", LeftSideOp.class);
-
-
+      manager.register("TankRobotOp", TankRobotOp.class);
 
   }
 }
